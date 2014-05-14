@@ -24,14 +24,14 @@ var nodemailer = require('nodemailer'),
 var smtpTransport = nodemailer.createTransport("SMTP", {
     service: "Gmail",
     auth: {
-        user: config.smtp.username,
-        pass: config.smtp.password
+        user: config.svmp.smtp.username,
+        pass: config.svmp.smtp.password
     }
 });
 
 
 function mailIt(options) {
-    if (config.sendmail) {
+    if (config.svmp.sendmail) {
         smtpTransport.sendMail(options, function (error, responseStatus) {
             if (error) {
                 console.log("Error sending email to user: ", error);
@@ -54,7 +54,7 @@ exports.sendToUser = function (email) {
 exports.sendToAdmin = function () {
     var opts = {
         from: 'noreplay@svmpadmin', // sender address
-        to: config.admincontact, // list of receivers
+        to: config.svmp.admincontact, // list of receivers
         subject: "SVMP: Pending user account",
         text: "A User has registered with SVMP. Please check the SVMP admin console for pending SVMP accounts"
     }

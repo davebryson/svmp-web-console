@@ -17,32 +17,24 @@
  *
  */
 'use strict';
-/**
- * Module dependencies.
- */
-var init = require('./config/init')(),
-	config = require('./config/config'),
-	mongoose = require('mongoose');
-
 
 /**
- * Main application entry file.
- * Please note that the order of loading is important.
+ * Template for local configuration file
+ * @type {{sessionSecret: string, sendmail: boolean, smtp: {username: string, password: string}, admincontact: string, openstack: {authUrl: string, username: string, password: string, tenantId: string, tenantName: string, region: string}}}
  */
-// Bootstrap db connection
-var db = mongoose.connect(config.db);
+module.exports = {
+    sessionSecret: 'make this a long secret',
 
-// Init the express application
-var app = require('./config/express')(db);
+    sendmail: true,
+    smtp: {username: '', password: ''},
+    admincontact: 'someone@mitre.org',
 
-// Bootstrap passport config
-require('./config/passport')();
-
-// Start the app by listening on <port>
-app.listen(config.port);
-
-// Expose app
-exports = module.exports = app;
-
-// Logging initialization
-console.log('MEAN.JS application started on port ' + config.port);
+    openstack: {
+        authUrl: "http://localhost:5000/",
+        username: "test",
+        password: "test",
+        tenantId: "0123456789abcdef0123456789abcdef",
+        tenantName: "test",
+        region: "RegionOne"
+    }
+};

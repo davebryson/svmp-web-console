@@ -18,6 +18,9 @@
  */
 'use strict';
 
+var
+    configlocal = require('../config-local');
+
 module.exports = {
 	app: {
 		title: 'SVMP Web',
@@ -27,9 +30,12 @@ module.exports = {
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
 
-    sessionSecret: 'svmp_make_long_value',
     sessionCollection: 'web_sessions',
 
+    svmp: configlocal,
+
+    // PUT IN LOCAL
+    sessionSecret: configlocal.sessionSecret,
     sendmail: true,
     smtp: {username: '', password: ''},
     admincontact: 'someone@mitre.org',

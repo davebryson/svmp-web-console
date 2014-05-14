@@ -173,7 +173,7 @@ exports.list = function (req, res) {
 
     User.find({approved: approvedFlag})
         .sort('-created')
-        .select('username email created approved roles')
+        .select('username email created approved roles device_type volume_id')
         .exec(function (err, results) {
             if (err) {
                 return res.send(400, {

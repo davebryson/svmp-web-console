@@ -7,4 +7,5 @@ public/lib
 app/tests/coverage/
 .bower-*/
 .idea/
+config-local.js
 TODO.txt

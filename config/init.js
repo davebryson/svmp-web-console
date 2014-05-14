@@ -21,7 +21,10 @@
 /**
  * Module dependencies.
  */
-var glob = require('glob');
+var
+    glob = require('glob'),
+    fs = require('fs'),
+    path = require('path');
 
 /**
  * Module init function.
@@ -35,13 +38,26 @@ module.exports = function () {
         sync: true
     }, function (err, environmentFiles) {
         console.log();
+
+        /**
+         * Create the local configuration file if it doesn't exist
+         */
+        fs.exists(path.resolve(__dirname,'./config-local.js'), function (exists) {
+            if(!exists) {
+                console.log('local configuration file not found. Creating...');
+                fs.writeFileSync(path.resolve(__dirname,'./config-local.js'),
+                    fs.readFileSync(path.resolve(__dirname,'./_config.local.template.js')));
+            } else {
+                console.log('existing local configuration file found');
+            }
+        });
+
         if (!environmentFiles.length) {
             if (process.env.NODE_ENV) {
                 console.log('\x1b[31m', 'No configuration file found for "' + process.env.NODE_ENV + '" environment using development instead');
             } else {
                 console.log('\x1b[31m', 'NODE_ENV is not defined! Using default development environment');
             }
-
             process.env.NODE_ENV = 'development';
         } else {
             console.log('\x1b[7m', 'Application loaded using the "' + process.env.NODE_ENV + '" environment configuration');

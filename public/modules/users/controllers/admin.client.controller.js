@@ -18,8 +18,9 @@
  */
 'use strict';
 
-angular.module('users').controller('AdminController', ['$scope', '$stateParams', '$http', '$location', 'Users', 'Authentication',
-    function ($scope, $stateParams, $http, $location, Users, Authentication) {
+angular.module('users').controller('AdminController', ['$scope','$rootScope',
+    '$stateParams', '$http', '$location', 'Users', 'Authentication','Volume',
+    function ($scope, $rootScope, $stateParams, $http, $location, Users, Authentication, Volume) {
 
         $scope.authentication = Authentication;
 
@@ -48,7 +49,7 @@ angular.module('users').controller('AdminController', ['$scope', '$stateParams',
         };
 
         $scope.deny = function (user) {
-            var deleteuser = confirm("Are you sure you want to deny this user? If so, it will remove the user's account");
+            var deleteuser = confirm("Are you sure you want to deny this user? If so, it will remove the user\'s account");
             if (deleteuser && user) {
                 user.$remove();
                 for (var i in $scope.users) {
@@ -87,5 +88,32 @@ angular.module('users').controller('AdminController', ['$scope', '$stateParams',
                 $scope.error = err.data.message;
             });
         };
+
+        $scope.createVolume = function(user) {
+            var makeVolume = confirm("Are you sure you want to create a Volume for this User?");
+            if (user && makeVolume) {
+                user.volume_id = "pending";
+                user.$update(function() {
+                    Volume(user);
+                }, function (err) {
+                    $scope.error = err.data.message;
+                });
+            }
+        };
+
+
+        var unbind = $rootScope.$on('volumeUpdate',function(ev,u) {
+            //console.log("Got event: ", u);
+            if (u) {
+                u.$update(function(){
+                    Users.query({approved: 'true'}).$promise.then(function (users) {
+                        $scope.users = users;
+                        $scope.total = users.length;
+                    });
+                });
+            }
+        });
+
+        $scope.$on('$destroy', unbind);
     }
 ]);
