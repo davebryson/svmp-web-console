@@ -206,8 +206,6 @@ exports.update = function (req, res) {
     var email = req.query.email === 'true';
     var message = null;
 
-    // TODO: How to handle emails for approved?
-
     User.findById(userId, function (err, user) {
         if (err) {
             return res.send(400, {
