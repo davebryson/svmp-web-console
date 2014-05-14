@@ -1,0 +1,28 @@
+<section data-ng-controller="AdminController" data-ng-init="listApproved()">
+    <div class="row">
+        <div class="title-header col-md-12">
+            <i class="glyphicon glyphicon-ok-circle"></i>&nbsp;Approved Users <small class="lt-gray">( {{total}} )</small>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <table class='table table-hover'>
+            <thead>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Created</th>
+            <th>Volume Id</th>
+            <th>Role</th>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="user in users | orderBy:'created'">
+                <td><a data-ng-href="#!/admin/user/{{user._id}}">{{user.username}}</a></td>
+                <td>{{user.email}}</td>
+                <td>{{user.created | date:'M/d/yy H:mm a'}}</td>
+                <td><a href="#">1234-45678-909093-3434334-94343-434343-934343</a></td>
+                <td>{{user.roles[0]}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
