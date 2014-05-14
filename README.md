@@ -15,6 +15,33 @@ After you've installed the dependencies, from within this directory run:
 $ npm install
 ```
 
+## Running
+
+On first run config/config-local.js will be created. Set your private settings here.
+
+During development:
+
+```
+$ grunt
+```
+
+Production:
+
+Set NODE_ENV=production
+
+```
+$ ./node_modules/.bin/forever -m 5 server.js
+```
+
+## Current Features
+
+* Self-registration
+* Account approval queue for Administrators
+* Email support
+* Manage Users
+* Openstack Volume creation
+
+
 ## License
 Copyright 2014 The MITRE Corporation, All Rights Reserved.
 

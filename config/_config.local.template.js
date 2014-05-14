@@ -35,6 +35,8 @@ module.exports = {
         password: "test",
         tenantId: "0123456789abcdef0123456789abcdef",
         tenantName: "test",
-        region: "RegionOne"
+        region: "RegionOne",
+        volumeSnapId: '',
+        volumeDefaultSize: 6
     }
 };

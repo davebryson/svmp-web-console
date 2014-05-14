@@ -36,9 +36,6 @@ module.exports = {
 
     // PUT IN LOCAL
     sessionSecret: configlocal.sessionSecret,
-    sendmail: true,
-    smtp: {username: '', password: ''},
-    admincontact: 'someone@mitre.org',
 
 	assets: {
 		lib: {
