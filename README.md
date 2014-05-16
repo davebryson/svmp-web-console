@@ -19,7 +19,7 @@ $ npm install
 
 On first run config/config-local.js will be created. Set your private settings here.
 
-During development:
+Development:
 
 ```
 $ grunt
@@ -39,7 +39,8 @@ $ ./node_modules/.bin/forever -m 5 server.js
 * Account approval queue for Administrators
 * Email support
 * Manage Users
-* Openstack Volume creation
+* Openstack Volume creation ( In progress... )
+
 
 
 ## License

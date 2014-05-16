@@ -31,7 +31,7 @@ var init = require('./config/init')(),
  */
 
 
-// SETUP Openstack here?
+// SETUP Openstack here
 
 // Bootstrap db connection
 var db = mongoose.connect(config.db);
